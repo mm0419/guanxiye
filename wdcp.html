@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>关系页</title>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript" src="vue/dist/vue-router.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<link rel="stylesheet" href="vue/css/wdcp.css" />
+<body>
+<div id="app">
+<div class="main">
+      <el-container style="height: 100vh; border: 1px solid #eee">
+  <el-aside width="15rem" style="background-color: rgb(238, 241, 246)">
+    <el-menu router :default-openeds="['1']">
+      <el-submenu index="1">
+        <template slot="title"><i class="el-icon-s-platform"></i>网站管理</template>
+        <el-menu-item-group>
+          <el-menu-item index="/creatWeb">创建站点</el-menu-item>
+          <el-menu-item index="/creatList">站点列表</el-menu-item>
+        </el-menu-item-group>
+      </el-submenu>
+    </el-menu>
+  </el-aside>
+  <el-container>
+    <el-header style="text-align: right; font-size: 1rem">
+    </el-header>    
+    <el-main>
+      <router-view></router-view>
+    </el-main>
+  </el-container>
+</el-container>
+</div>
+</div>
+
+<template id="temp1">
+  <div class="about">
+    <el-form ref="form" label-width="100px">
+      <el-form-item label="站点名称">
+        <el-input placeholder="如:wdlinux.cn" v-model="form.list.name"></el-input>
+        <p class="red">* 不带http://，创建后不可修改</p>
+      </el-form-item>
+      <el-form-item>
+        <el-switch v-model="form.delivery"></el-switch>
+        <p class="mg-2">添加www主机名，如：www.wdlinux.cn</p>
+      </el-form-item>
+      <el-form-item label="站点目录">
+        <el-input placeholder="留空将使用域名为目录" v-model="form.list.ml"></el-input>
+      </el-form-item>
+      <el-form-item label="默认首页">
+        <el-input placeholder="index.html,index.php"></el-input>
+      </el-form-item>
+      <el-form-item label="备注信息">
+        <el-input placeholder="可选"></el-input>
+      </el-form-item>
+
+      <el-collapse class="bg-c1">
+        <el-collapse-item>
+          <template slot="title">
+            绑定域名
+          </template>         
+          <el-form-item label="绑定域名">
+            <el-input placeholder="如:blog.wdlinux.cn" v-model="form.list.address"></el-input>
+          </el-form-item>
+        </el-collapse-item>
+      </el-collapse>
+
+      <el-form-item class="mt-2">
+        <el-button type="primary" @click="Created">提交</el-button>
+        <el-button>重置</el-button>
+      </el-form-item>
+    </el-form>
+  </div>
+</template>
+
+
+<template id="temp2">
+  <div class="webList">
+
+    <div class="top ft-2 pt-2">
+      <div class="top_left cl-white">
+        <router-link to="/" tag="div" class=" bg-green pd-2"><i class="el-icon-refresh-right pd-1"></i>更新站点设置
+        </router-link>
+        <router-link to="/" tag="div" class=" bg-blue pd-2 mg-1"><i class="el-icon-circle-check pd-1"></i>配置文件检查
+        </router-link>
+      </div>
+      <div class="top_right">
+        <div class="top_right_l">
+          <select class="pd-1">
+            <option>域名</option>
+            <option>绑定域名</option>
+          </select>
+        </div>
+        <div class="top_right_2">
+          <input type="text" placeholder="搜索域名" v-model="search" class="pd-2">
+          <button><i class="el-icon-search"></i></button>
+        </div>
+      </div>
+    </div>
+
+
+    <el-table :data="tableData" border :header-cell-style='tableHeader'>
+      <el-table-column prop="id" label="ID" width="40">
+      </el-table-column>
+      <el-table-column prop="name" label="站点域名" width="160">
+      </el-table-column>
+      <el-table-column prop="address" label="绑定域名" width="290">
+      </el-table-column>
+      <el-table-column prop="ml" label="目录" width="380">
+      </el-table-column>
+      <el-table-column prop="ssl" label="SSL" width="50">
+      </el-table-column>
+      <el-table-column prop="time" label="开通时间" width="60">
+      </el-table-column>
+      <el-table-column prop="php" label="PHP" width="60">
+      </el-table-column>
+      <el-table-column label="状态" width="75">
+        <template slot-scope="scope">
+          <el-switch v-model="scope.row.delivery2"></el-switch>
+        </template>
+      </el-table-column>
+      <el-table-column label="操作" width="40">
+        <template class="webScope" slot-scope="scope">
+          <el-button v-popover:popover4 type="text" size="big" class="text-c">更多</el-button>
+          <i class="el-icon-caret-bottom"></i>
+          <div>
+            <el-popover ref="popover4" width="80" height="auto" trigger="click" placement="left">
+              <p @click="$router.push(`/creatWeb/edit/${scope.row.id}`)"><i class="el-icon-edit-outline pd-1"></i>编辑站点
+              </p>
+              <p><i class="el-icon-document pd-1"></i>文件管理</p>
+            </el-popover>
+          </div>
+
+        </template>
+      </el-table-column>
+    </el-table>
+  </div>
+</template>
+
+<script type="text/javascript">
+
+
+         const creatWeb = {
+            template:'#temp1',
+            data(){
+                return {
+                   form: {
+                       list:[
+                         {ml: '',name: '', address: '',time: '', id: ''}
+                            ],
+                          delivery: false,
+                          delivery2: false,
+                          },
+                         checkList: []
+                }
+            },
+            methods: {
+               Created () {
+                this.bus.$emit('website_c', this.form.list)
+               this.$router.push('/creatList')
+                  }
+    }
+
+        }
+  const creatList = {
+    template:'#temp2',
+    data () {
+      return {
+        search: '',
+        tableData: [{
+            id: 1,
+            name: '老张',
+            ml: '上海市普陀区金沙江路 1518 弄',
+            address: 'wwww.baidu.com',
+            ssl: '否',
+            php: '默认',
+            zt: '1',
+            time: '2019-08-15',
+            delivery2: false,
+          },
+          {
+            id: 2,
+            name: '老张',
+            ml: '上海市普陀区金沙江路 1518 弄',
+            address: 'wwww.baidu.com',
+            ssl: '否',
+            php: '默认',
+            zt: '1',
+            time: '2019-08-15',
+            delivery2: false,
+
+          },
+          {
+            id: 3,
+            name: '老张',
+            ml: '上海市普陀区金沙江路 1518 弄',
+            address: 'wwww.baidu.com',
+            ssl: '否',
+            php: '默认',
+            zt: '1',
+            time: '2019-08-15',
+            delivery2: false,
+
+          }
+
+        ]
+      }
+    },
+    methods: {
+      tableHeader({
+        row,
+        column,
+        rowIndex,
+        columnIndex
+      }) {
+        return 'background-color:#e6e6e6;color:#606266;text-align: center;'
+      },
+    },
+  }
+
+  const router = new VueRouter ({
+    routes: [
+           {path:'/', redirect:'/creatWeb'},
+           {path:'/creatWeb', component:creatWeb},
+           {path: '/creatList', component: creatList},
+           {path:'/creatWeb/edit/:id', component:creatWeb, props: true},
+
+    ],
+  })
+  const vm = new Vue ({
+    el:'#app',
+    data () {
+      return {}
+    },
+    methods:{
+
+    },
+    router: router,
+  })
+</script>
+</body>
+
+</html>

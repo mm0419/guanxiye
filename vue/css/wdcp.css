@@ -1,0 +1,180 @@
+.articleModel input {
+  display: block;
+  position: relative;
+  width: 35px;
+  height: 60px;
+  border: 0;
+  margin: 0;
+}
+.el-header {
+    background-color: #3379B7;
+    color: #333;
+    line-height: 45px;
+  }
+  
+  .el-aside {
+    color: #333;
+  }
+  * {
+margin : 0;
+padding: 0;
+box-sizing: border-box;
+}
+body {
+  font-size: 14px;
+  color: ccc;
+}
+.red {
+  color: #FF5722;
+}
+.bg-1 {
+  background-color: #f2f2f2;
+}
+.mg-2 {
+  margin-left: 2em;
+}
+.mt-2 {
+  margin-top: 2rem;
+}
+.text-c {
+  text-align: center;
+}
+.ft-1 {
+  font-size: 1rem;
+}
+.ft-2 {
+  font-size: 0.8rem;
+}
+.ft-3 {
+  font-size: 1.9rem;
+}
+.cl-white {
+  color: #fff;
+}
+.bg-green {
+  background-color: #009688;
+}
+.bg-blue {
+  background-color: #1E9FFF;
+}
+.pd-1 {
+  padding: 0 3px;
+}
+.pd-2 {
+  padding: 0 1rem;
+}
+.pt-1 {
+  padding: 0.5rem 0;
+}
+.pt-2 {
+  padding: 1rem 0;
+}
+.mg-1 {
+margin: 0 0.5rem;
+}
+.about {
+    text-align: left;
+  }
+
+  .el-form {
+    border: 1px solid #e6e6e6;
+    padding: 1rem;
+  }
+
+  .el-input {
+    width: 14em;
+    margin: 0 1em 0 0;
+    outline: none;
+  }
+
+  .el-input__inner {
+    line-height: 2rem;
+    height: 2rem;
+  }
+
+  .el-form-item {
+    margin-bottom: 0;
+    margin-left: 1rem;
+  }
+
+  .el-form-item p {
+    display: inline-block;
+  }
+
+  .el-collapse-item__header {
+    background-color: #f2f2f2;
+    padding: 0 1.8rem;
+  }
+
+  .el-collapse-item__arrow {
+    margin-left: -71px;
+    color: #303133;
+  }
+  .top {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .top_left {
+    height: 30px;
+    display: flex;
+
+  }
+
+  .top_left div {
+    line-height: 30px;
+    display: flex;
+    align-items: center;
+    border-radius: 0.2rem;
+  }
+
+  .top_left div i {
+    font-size: 1rem;
+  }
+
+  .top_right {
+    display: flex;
+    height: 30px;
+  }
+
+  .top_right_l select {
+    line-height: 30px;
+    height: 30px;
+    border-color: #e6e6e6;
+    margin-left: 1rem;
+  }
+
+  .top_right_2 {
+    display: flex;
+  }
+
+  .top_right_2 input {
+    line-height: 30px;
+    outline: none;
+    border: none;
+    outline: none;
+    border: 1px solid #e6e6e6;
+  }
+
+  .top_right_2 button {
+    line-height: 30px;
+    height: 30px;
+    ;
+    width: 30px;
+    border: none;
+    background-color: #fff;
+    outline: none;
+    border: 1px solid #e6e6e6;
+  }
+
+  .top_right_2 button i {
+    color: #666;
+    font-size: 1rem;
+  }
+
+  .webScope p {
+    font-size: 1rem;
+    list-style: none;
+    line-height: 36px;
+    cursor: pointer;
+  }
