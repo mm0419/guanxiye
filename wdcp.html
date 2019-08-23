@@ -49,10 +49,10 @@
         <el-input placeholder="留空将使用域名为目录" v-model="form.list.ml"></el-input>
       </el-form-item>
       <el-form-item label="默认首页">
-        <el-input placeholder="index.html,index.php"></el-input>
+        <el-input placeholder="index.html,index.php" v-model="form.list.default"></el-input>
       </el-form-item>
       <el-form-item label="备注信息">
-        <el-input placeholder="可选"></el-input>
+        <el-input placeholder="可选" v-model="form.list.tag"></el-input>
       </el-form-item>
 
       <el-collapse class="bg-c1">
@@ -68,7 +68,7 @@
 
       <el-form-item class="mt-2">
         <el-button type="primary" @click="Created">提交</el-button>
-        <el-button>重置</el-button>
+        <el-button @click="reset">重置</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -147,7 +147,7 @@
                 return {
                    form: {
                        list:[
-                         {ml: '',name: '', address: '',time: '', id: ''}
+                         {ml: '',name: '', address: '',time: '', id: '',tag: '', default: ''}
                             ],
                           delivery: false,
                           delivery2: false,
@@ -159,7 +159,11 @@
                Created () {
                 this.bus.$emit('website_c', this.form.list)
                this.$router.push('/creatList')
-                  }
+                  },
+               reset () {
+                this.form.list.ml = this.form.list.name = this.form.list.address = this.form.list.time = this.form.list.id = this.form.list.tag = this.form.list.default = ''
+                this.form.delivery = this.form.delivery2 = false
+               }
     }
 
         }
