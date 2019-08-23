@@ -1,201 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>关系页</title>
 </head>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script type="text/javascript" src="vue/dist/vue-router.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-
-
-</script>
-
-<style>
-.articleModel input {
-  display: block;
-  position: relative;
-  width: 35px;
-  height: 60px;
-  border: 0;
-  margin: 0;
-}
-.el-header {
-    background-color: #3379B7;
-    color: #333;
-    line-height: 45px;
-  }
-  
-  .el-aside {
-    color: #333;
-  }
-  * {
-margin : 0;
-padding: 0;
-box-sizing: border-box;
-}
-body {
-  font-size: 14px;
-  color: ccc;
-}
-.red {
-  color: #FF5722;
-}
-.bg-1 {
-  background-color: #f2f2f2;
-}
-.mg-2 {
-  margin-left: 2em;
-}
-.mt-2 {
-  margin-top: 2rem;
-}
-.text-c {
-  text-align: center;
-}
-.ft-1 {
-  font-size: 1rem;
-}
-.ft-2 {
-  font-size: 0.8rem;
-}
-.ft-3 {
-  font-size: 1.9rem;
-}
-.cl-white {
-  color: #fff;
-}
-.bg-green {
-  background-color: #009688;
-}
-.bg-blue {
-  background-color: #1E9FFF;
-}
-.pd-1 {
-  padding: 0 3px;
-}
-.pd-2 {
-  padding: 0 1rem;
-}
-.pt-1 {
-  padding: 0.5rem 0;
-}
-.pt-2 {
-  padding: 1rem 0;
-}
-.mg-1 {
-margin: 0 0.5rem;
-}
-.al-t{
-  align-items: center;
-}
-.about {
-    text-align: left;
-  }
-
-  .el-form {
-    border: 1px solid #e6e6e6;
-    padding: 1rem;
-  }
-
-  .el-input {
-    width: 14em;
-    margin: 0 1em 0 0;
-    outline: none;
-  }
-
-  .el-input__inner {
-    line-height: 2rem;
-    height: 2rem;
-  }
-
-  .el-form-item {
-    margin-bottom: 0;
-    margin-left: 1rem;
-  }
-
-  .el-form-item p {
-    display: inline-block;
-  }
-
-  .el-collapse-item__header {
-    background-color: #f2f2f2;
-    padding: 0 1.8rem;
-  }
-
-  .el-collapse-item__arrow {
-    margin-left: -71px;
-    color: #303133;
-  }
-  .top {
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  .top_left {
-    height: 30px;
-    display: flex;
-
-  }
-
-  .top_left div {
-    line-height: 30px;
-    display: flex;
-    align-items: center;
-    border-radius: 0.2rem;
-  }
-
-  .top_left div i {
-    font-size: 1rem;
-  }
-
-  .top_right {
-    display: flex;
-    height: 30px;
-  }
-
-  .top_right_l select {
-    line-height: 30px;
-    height: 30px;
-    border-color: #e6e6e6;
-    margin-left: 1rem;
-  }
-
-  .top_right_2 {
-    display: flex;
-  }
-
-  .top_right_2 input {
-    line-height: 30px;
-    outline: none;
-    border: none;
-    outline: none;
-    border: 1px solid #e6e6e6;
-  }
-
-  .top_right_2 button {
-    line-height: 30px;
-    height: 30px;
-    ;
-    width: 30px;
-    border: none;
-    background-color: #fff;
-    outline: none;
-    border: 1px solid #e6e6e6;
-  }
-
-  .top_right_2 button i {
-    color: #666;
-    font-size: 1rem;
-  }
-
-  .webScope p {
-    font-size: 1rem;
-    list-style: none;
-    line-height: 36px;
-    cursor: pointer;
-  }
-</style>
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<link rel="stylesheet" href="vue/css/wdcp.css" />
 <body>
 <div id="app">
 <div class="main">
@@ -247,44 +59,12 @@ margin: 0 0.5rem;
         <el-collapse-item>
           <template slot="title">
             绑定域名
-          </template>
-          <el-form-item label="泛域名支持">
-            <el-switch v-model="form.delivery2"></el-switch>
-            <p class="red mg-2">对泛域名的支持，一般不需要开启</p>
-          </el-form-item>
-          <el-form-item label="绑定域名" class="al-t">
-            <div v-for="(item, i) of form.addWebsite" :key='i'>
-              <el-input placeholder="如:blog.wdlinux.cn" v-model="item.name" ></el-input>
-              <p @click.prevent="del(i)"><i class="el-icon-remove-outline ft-3"></i></p>
-
-            </div>
-              <p @click="form.addWebsite.push({})"><i class="el-icon-circle-plus-outline ft-3"></i></p>
-            
+          </template>         
+          <el-form-item label="绑定域名">
+            <el-input placeholder="如:blog.wdlinux.cn" v-model="form.list.address"></el-input>
           </el-form-item>
         </el-collapse-item>
       </el-collapse>
-
-      <el-collapse class="bg-c1">
-        <el-collapse-item>
-          <template slot="title">
-            错误页面
-          </template>
-          <el-form-item label="错误提示页">
-            <el-checkbox-group v-model="checkList">
-              <el-checkbox label="400"></el-checkbox>
-              <el-checkbox label="401"></el-checkbox>
-              <el-checkbox label="403"></el-checkbox>
-              <el-checkbox label="404"></el-checkbox>
-              <el-checkbox label="405"></el-checkbox>
-              <el-checkbox label="500"></el-checkbox>
-              <el-checkbox label="503"></el-checkbox>
-
-            </el-checkbox-group>
-            <p class="mg-2">默认错误提示页位于errpage下，可自定义修改</p>
-          </el-form-item>
-        </el-collapse-item>
-      </el-collapse>
-
 
       <el-form-item class="mt-2">
         <el-button type="primary" @click="Created">提交</el-button>
@@ -295,7 +75,7 @@ margin: 0 0.5rem;
 </template>
 
 
-<template id="temp2" @func="loadComment">
+<template id="temp2">
   <div class="webList">
 
     <div class="top ft-2 pt-2">
@@ -312,15 +92,15 @@ margin: 0 0.5rem;
             <option>绑定域名</option>
           </select>
         </div>
-        <div class="top_right_2 dormitory">
+        <div class="top_right_2">
           <input type="text" placeholder="搜索域名" v-model="search" class="pd-2">
           <button><i class="el-icon-search"></i></button>
         </div>
       </div>
     </div>
 
-    <el-table :data="tableData" ref="dormitoryTable" border :header-cell-style='tableHeader'>
 
+    <el-table :data="tableData" border :header-cell-style='tableHeader'>
       <el-table-column prop="id" label="ID" width="40">
       </el-table-column>
       <el-table-column prop="name" label="站点域名" width="160">
@@ -337,22 +117,21 @@ margin: 0 0.5rem;
       </el-table-column>
       <el-table-column label="状态" width="75">
         <template slot-scope="scope">
-
           <el-switch v-model="scope.row.delivery2"></el-switch>
-          {{scope.row.delivery2}}
         </template>
       </el-table-column>
       <el-table-column label="操作" width="40">
         <template class="webScope" slot-scope="scope">
-            <el-popover trigger="click" width="80" height="auto" trigger="click" placement="left">
+          <el-button v-popover:popover4 type="text" size="big" class="text-c">更多</el-button>
+          <i class="el-icon-caret-bottom"></i>
+          <div>
+            <el-popover ref="popover4" width="80" height="auto" trigger="click" placement="left">
               <p @click="$router.push(`/creatWeb/edit/${scope.row.id}`)"><i class="el-icon-edit-outline pd-1"></i>编辑站点
               </p>
               <p><i class="el-icon-document pd-1"></i>文件管理</p>
-              <div slot="reference">
-                <el-button slot="reference" v- type="text" size="big" class="text-c">更多</el-button>
-               <i class="el-icon-caret-bottom"></i>
-              </div>
             </el-popover>
+          </div>
+
         </template>
       </el-table-column>
     </el-table>
@@ -372,28 +151,15 @@ margin: 0 0.5rem;
                             ],
                           delivery: false,
                           delivery2: false,
-                          addWebsite:[{name: ''}]
                           },
-                         checkList: [],
-                         
+                         checkList: []
                 }
             },
             methods: {
                Created () {
-                let newList = {ml: this.ml, name: this.name, time: this.time, id: this.id}
-                 
-                dormitory.push(newList)
-                
-                this.$emit('func')
-                this.$router.push('/creatList')
-            
-                  },
-                  del(i) {
-                     if (i >= 1) {
-                      this.form.addWebsite.splice(i, 1)
-                     }
-                  },
-                
+                this.bus.$emit('website_c', this.form.list)
+               this.$router.push('/creatList')
+                  }
     }
 
         }
@@ -402,7 +168,7 @@ margin: 0 0.5rem;
     data () {
       return {
         search: '',
-        dormitory: [{
+        tableData: [{
             id: 1,
             name: '老张',
             ml: '上海市普陀区金沙江路 1518 弄',
@@ -412,7 +178,6 @@ margin: 0 0.5rem;
             zt: '1',
             time: '2019-08-15',
             delivery2: false,
-            visible: false,
           },
           {
             id: 2,
@@ -424,13 +189,11 @@ margin: 0 0.5rem;
             zt: '1',
             time: '2019-08-15',
             delivery2: false,
-        visible: false,
-
 
           },
           {
             id: 3,
-            name: '小郭',
+            name: '老张',
             ml: '上海市普陀区金沙江路 1518 弄',
             address: 'wwww.baidu.com',
             ssl: '否',
@@ -438,11 +201,8 @@ margin: 0 0.5rem;
             zt: '1',
             time: '2019-08-15',
             delivery2: false,
-        visible: false,
 
-
-          },
-
+          }
 
         ]
       }
@@ -456,34 +216,7 @@ margin: 0 0.5rem;
       }) {
         return 'background-color:#e6e6e6;color:#606266;text-align: center;'
       },
-      // loadComment () {
-      //   let dormitory = JSON.parse(localStorage.getItem('creatList'))
-      //   this.dormitory = dormitory
-      // }
     },
-    // watch: {
-    //     search : function (val, oldVal) {
-    //       this.tableData = this.otableData.filter( item => (~item.name.indexOf(val)))
-    //     }
-    // },
-    computed: {
-      tableData () {
-        const search = this.search
-        if(search) {
-          return this.dormitory.filter(data => {
-            return Object.keys(data).some(key => {
-              return String(data[key]).toLowerCase().indexOf(search) > -1
-               })
-          })
-        }
-        return this.dormitory
-      }
-
-    },
-    // created() {
-    //             this.loadComment()
-    //         },
-
   }
 
   const router = new VueRouter ({
